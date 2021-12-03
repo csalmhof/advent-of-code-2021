@@ -9,7 +9,7 @@ This project contains my solutions written in Java for the [Advent of Code](http
 |:---:|:---:|:---:|
 | 1 | [Sonar Sweep](https://adventofcode.com/2021/day/1) | [Solution](src/main/java/com/github/csalmhof/aoc2021/Puzzle01.java)|
 | 2 | [Dive!](https://adventofcode.com/2021/day/2) | [Solution](src/main/java/com/github/csalmhof/aoc2021/Puzzle02.java)|
-| 3 |  |  |
+| 3 | [Binary Diagnostic](https://adventofcode.com/2021/day/3) | [Solution](src/main/java/com/github/csalmhof/aoc2021/Puzzle03.java)|
 | 4 |  |  |
 | 5 |  |  |
 | 6 |  |  |
