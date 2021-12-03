@@ -9,28 +9,20 @@ import java.util.stream.Collectors;
 public class StringUtils {
 
   public static List<Character> findMaxOccuringCharsInString(String s) {
-
-    Map<Character, Integer> charCountMap = countCharsInString(s);
-
-    Integer maxCount = charCountMap.values().stream()
-        .max(Comparator.comparing(Function.identity()))
-        .orElse(0);
-
-    return charCountMap.entrySet().stream()
-        .filter(entry -> entry.getValue().equals(maxCount))
-        .map(Map.Entry::getKey)
-        .collect(Collectors.toList());
+    return getMaxComparingChars(countCharsInString(s), Comparator.comparing(Function.identity()), 0);
   }
 
   public static List<Character> findMinOccuringCharsInString(String s) {
-    Map<Character, Integer> charCountMap = countCharsInString(s);
+    return getMaxComparingChars(countCharsInString(s), Comparator.comparing(i -> -i), Integer.MAX_VALUE);
+  }
 
-    Integer minCount = charCountMap.values().stream()
-        .min(Comparator.comparing(Function.identity()))
-        .orElse(Integer.MAX_VALUE);
+  private static List<Character> getMaxComparingChars(Map<Character, Integer> charCountMap, Comparator<Integer> maxComparator, int elseValue) {
+    Integer maxCount = charCountMap.values().stream()
+        .max(maxComparator)
+        .orElse(elseValue);
 
     return charCountMap.entrySet().stream()
-        .filter(entry -> entry.getValue().equals(minCount))
+        .filter(entry -> entry.getValue().equals(maxCount))
         .map(Map.Entry::getKey)
         .collect(Collectors.toList());
   }
@@ -45,33 +37,15 @@ public class StringUtils {
   }
 
   public static Character findMaxOccuringCharInStringWithPreferringValue(char c, String s) {
-    return returnSingletonFromListOrPreferred(c, findMaxOccuringCharsInString(s));
+    return ListUtils.singletonOrPreferred(c, findMaxOccuringCharsInString(s));
   }
 
   public static Character findMinOccuringCharInStringWithPreferringValue(char c, String s) {
-    return returnSingletonFromListOrPreferred(c, findMinOccuringCharsInString(s));
-  }
-
-  private static Character returnSingletonFromListOrPreferred(char c, List<Character> maxOccuringChars) {
-    if (maxOccuringChars.size() == 1) {
-      return maxOccuringChars.get(0);
-    } else {
-      return c;
-    }
+    return ListUtils.singletonOrPreferred(c, findMinOccuringCharsInString(s));
   }
 
   public static String invertBinaryString(String s) {
-    StringBuilder result = new StringBuilder();
-
-    for (char c : s.toCharArray()) {
-      if (c == '1') {
-        result.append('0');
-      } else {
-        result.append('1');
-      }
-    }
-
-    return result.toString();
+    return s.replace('0', 'x').replace('1', '0').replace('x', '1');
   }
 
   public static int binaryStringToInt(String s) {

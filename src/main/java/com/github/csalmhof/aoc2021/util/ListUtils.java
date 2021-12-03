@@ -1,27 +1,22 @@
 package com.github.csalmhof.aoc2021.util;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class ListUtils {
 
   public static List<String> transpose(List<String> input) {
-    List<String> result = initListWithNemptyStrings(input.get(0).length());
-
-    for (String s : input) {
-      for (int i = 0; i < result.size(); i++) {
-        result.set(i, result.get(i) + s.charAt(i));
-      }
-    }
-
-    return result;
+    return IntStream.range(0, input.get(0).length())
+        .mapToObj(i ->
+            input.stream()
+                .map(string -> string.charAt(i))
+                .map(String::valueOf)
+                .collect(Collectors.joining()))
+        .collect(Collectors.toList());
   }
 
-  private static List<String> initListWithNemptyStrings(int n) {
-    List<String> list = new ArrayList<>();
-    for (int i = 0; i < n; i++) {
-      list.add("");
-    }
-    return list;
+  public static <T> T singletonOrPreferred(T preferred, List<T> vals) {
+    return vals.size() == 1 ? vals.get(0) : preferred;
   }
 }
