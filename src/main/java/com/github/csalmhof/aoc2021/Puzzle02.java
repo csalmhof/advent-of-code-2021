@@ -5,7 +5,6 @@ import com.github.csalmhof.aoc2021.helpers.day2.Puzzle02Part1Result;
 import com.github.csalmhof.aoc2021.helpers.day2.Puzzle02Part2Result;
 
 import java.util.List;
-import java.util.function.Consumer;
 
 public class Puzzle02 extends AbstractPuzzle {
 
@@ -17,21 +16,16 @@ public class Puzzle02 extends AbstractPuzzle {
   @Override
   public int calculatePart1Result(List<String> input) {
     Puzzle02Part1Result result = new Puzzle02Part1Result();
-    processCommandsOnResult(input, result::processCommand);
+    result.processCommands(Command.toCommands(input));
     return result.calculate();
   }
 
   @Override
   public int calculatePart2Result(List<String> input) {
     Puzzle02Part2Result result = new Puzzle02Part2Result();
-    processCommandsOnResult(input, result::processCommand);
+    result.processCommands(Command.toCommands(input));
     return result.calculate();
   }
 
-  private void processCommandsOnResult(List<String> input, Consumer<Command> processor) {
-    input.stream()
-        .map(Command::new)
-        .forEach(processor);
-  }
 
 }

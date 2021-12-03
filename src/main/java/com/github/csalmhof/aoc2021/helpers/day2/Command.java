@@ -1,5 +1,8 @@
 package com.github.csalmhof.aoc2021.helpers.day2;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class Command {
   private Instruction instruction;
   private int value;
@@ -16,5 +19,11 @@ public class Command {
 
   public int getValue() {
     return value;
+  }
+
+  public static List<Command> toCommands(List<String> strings) {
+    return strings.stream()
+        .map(Command::new)
+        .collect(Collectors.toList());
   }
 }
