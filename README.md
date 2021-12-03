@@ -8,7 +8,7 @@ This project contains my solutions written in Java for the [Advent of Code](http
 | Day | Task | Solution |
 |:---:|:---:|:---:|
 | 1 | [Sonar Sweep](https://adventofcode.com/2021/day/1) | [Solution](src/main/java/com/github/csalmhof/aoc2021/Puzzle01.java)|
-| 2 |  |  |
+| 2 | [Dive!](https://adventofcode.com/2021/day/2) | [Solution](src/main/java/com/github/csalmhof/aoc2021/Puzzle02.java)|
 | 3 |  |  |
 | 4 |  |  |
 | 5 |  |  |
