@@ -1,7 +1,12 @@
-#Advent of Code 2021
+# Advent of Code 2021
 
 ## Introduction
 This project contains my solutions written in Java for the [Advent of Code](https://adventofcode.com/) 2021.
+
+## TDD-Approach
+I tried to use a TDD-approach.
+
+I implemented a [abstract test class](src/test/java/com/github/csalmhof/aoc2021/AbstractPuzzleTest.java), where the tests are defined. The test classes for the specific puzzles only contain methods to define the expected results and which puzzle to use for the test.
 
 ## Solutions
 
