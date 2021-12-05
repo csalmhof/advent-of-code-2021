@@ -1,6 +1,7 @@
 package com.github.csalmhof.aoc2021;
 
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class Puzzle01 extends AbstractPuzzle {
 
@@ -20,27 +21,15 @@ public class Puzzle01 extends AbstractPuzzle {
   }
 
   private int calculateResult(List<String> input, int slidingWindowSize) {
-    int increasingValues = 0;
-
-    for (int i = slidingWindowSize; i < input.size(); i++) {
-      if (sumLastValues(input, slidingWindowSize, i) > sumLastValues(input, slidingWindowSize, i - 1)) {
-        increasingValues++;
-      }
-    }
-
-    return increasingValues;
+    return (int) IntStream.range(slidingWindowSize, input.size())
+        .filter(i -> sumLastValues(input, slidingWindowSize, i) > sumLastValues(input, slidingWindowSize, i-1))
+        .count();
   }
 
   private int sumLastValues(List<String> input, int windowSize, int position) {
-    int sum = 0;
-    int numOfCalculatedValues = 0;
-
-    while (numOfCalculatedValues < windowSize) {
-      String value = input.get(position - numOfCalculatedValues);
-      sum += Integer.parseInt(value);
-      numOfCalculatedValues++;
-    }
-    return sum;
+    return IntStream.range(0, windowSize)
+        .mapToObj(i -> Integer.parseInt(input.get(position-i)))
+        .reduce(0, Integer::sum);
   }
 
 }
