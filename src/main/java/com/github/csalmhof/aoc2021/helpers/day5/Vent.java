@@ -1,8 +1,9 @@
 package com.github.csalmhof.aoc2021.helpers.day5;
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Vent {
   Point start;
@@ -17,26 +18,24 @@ public class Vent {
   }
 
   public List<Point> points() {
-    int dirX = Integer.compare(end.x, start.x);
-    int dirY = Integer.compare(end.y, start.y);
-
-    ArrayList<Point> result = new ArrayList<>();
-
-    for (int x = start.x, y = start.y; (x != end.x + dirX) || (y != end.y + dirY); x += dirX, y += dirY) {
-      result.add(new Point(x, y));
-    }
-    return result;
+    return IntStream.range(0, dist()+1)
+        .mapToObj(i -> new Point(start.x + (i*dirX()), start.y + (i*dirY())))
+        .collect(Collectors.toList());
   }
 
-  public boolean isHorizontal() {
-    return start.y == end.y;
+  private int dist() {
+    return Math.max(Math.abs(start.x - end.x), Math.abs(start.y - end.y));
   }
 
-  public boolean isVertical() {
-    return start.x == end.x;
+  private int dirY() {
+    return Integer.compare(end.y, start.y);
+  }
+
+  private int dirX() {
+    return Integer.compare(end.x, start.x);
   }
 
   public boolean isDiagonal() {
-    return !isHorizontal() && !isVertical();
+    return start.x != end.x && start.y != end.y;
   }
 }
