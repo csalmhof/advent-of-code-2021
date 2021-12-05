@@ -16,7 +16,7 @@ I implemented a [abstract test class](src/test/java/com/github/csalmhof/aoc2021/
 | 2 | [Dive!](https://adventofcode.com/2021/day/2) | [Solution](src/main/java/com/github/csalmhof/aoc2021/Puzzle02.java)|
 | 3 | [Binary Diagnostic](https://adventofcode.com/2021/day/3) | [Solution](src/main/java/com/github/csalmhof/aoc2021/Puzzle03.java)|
 | 4 | [Giant Squid](https://adventofcode.com/2021/day/4) | [Solution](src/main/java/com/github/csalmhof/aoc2021/Puzzle04.java)|
-| 5 |  |  |
+| 5 | [Hydrothermal Venture](https://adventofcode.com/2021/day/5) | [Solution](src/main/java/com/github/csalmhof/aoc2021/Puzzle05.java)| |  |
 | 6 |  |  |
 | 7 |  |  |
 | 8 |  |  |
