@@ -18,7 +18,7 @@ public class Vent {
   }
 
   public List<Point> points() {
-    return IntStream.range(0, dist()+1)
+    return IntStream.rangeClosed(0, dist())
         .mapToObj(i -> new Point(start.x + (i*dirX()), start.y + (i*dirY())))
         .collect(Collectors.toList());
   }
