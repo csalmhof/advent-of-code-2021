@@ -14,14 +14,14 @@ public class Puzzle02 extends AbstractPuzzle {
   }
 
   @Override
-  public int calculatePart1Result(List<String> input) {
+  public long calculatePart1Result(List<String> input) {
     Puzzle02Part1Result result = new Puzzle02Part1Result();
     result.processCommands(Command.toCommands(input));
     return result.calculate();
   }
 
   @Override
-  public int calculatePart2Result(List<String> input) {
+  public long calculatePart2Result(List<String> input) {
     Puzzle02Part2Result result = new Puzzle02Part2Result();
     result.processCommands(Command.toCommands(input));
     return result.calculate();

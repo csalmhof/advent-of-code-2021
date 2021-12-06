@@ -11,9 +11,9 @@ public abstract class AbstractPuzzleTest {
     this.puzzle = getPuzzleInstance();
   }
 
-  public abstract int getExpectedExampleResultPart1();
+  public abstract long getExpectedExampleResultPart1();
 
-  public abstract int getExpectedExampleResultPart2();
+  public abstract long getExpectedExampleResultPart2();
 
   public abstract AbstractPuzzle getPuzzleInstance();
 

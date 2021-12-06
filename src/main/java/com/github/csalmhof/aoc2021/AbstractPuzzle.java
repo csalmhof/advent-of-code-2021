@@ -8,15 +8,15 @@ public abstract class AbstractPuzzle {
 
   public abstract int getDay();
 
-  public abstract int calculatePart1Result(List<String> input);
+  public abstract long calculatePart1Result(List<String> input);
 
-  public abstract int calculatePart2Result(List<String> input);
+  public abstract long calculatePart2Result(List<String> input);
 
-  public int getPart1Result(String filePath) {
+  public long getPart1Result(String filePath) {
     return calculatePart1Result(getInput(filePath));
   }
 
-  public int getPart2Result(String filePath) {
+  public long getPart2Result(String filePath) {
     return calculatePart2Result(getInput(filePath));
   }
 

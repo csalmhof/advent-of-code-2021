@@ -15,7 +15,7 @@ public class Puzzle03 extends AbstractPuzzle {
   }
 
   @Override
-  public int calculatePart1Result(List<String> input) {
+  public long calculatePart1Result(List<String> input) {
     List<String> transposedInput = ListUtils.transpose(input);
 
     String binaryGamma = transposedInput.stream()
@@ -29,7 +29,7 @@ public class Puzzle03 extends AbstractPuzzle {
   }
 
   @Override
-  public int calculatePart2Result(List<String> input) {
+  public long calculatePart2Result(List<String> input) {
     String oxygenBinary = findRecursiveByMostMatchingValue('1', input);
     String co2scrubberRating = findRecursiveByLeastMatchingValue('0', input);
 

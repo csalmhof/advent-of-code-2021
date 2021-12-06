@@ -11,12 +11,12 @@ public class Puzzle01 extends AbstractPuzzle {
   }
 
   @Override
-  public int calculatePart1Result(List<String> input) {
+  public long calculatePart1Result(List<String> input) {
     return calculateResult(input, 1);
   }
 
   @Override
-  public int calculatePart2Result(List<String> input) {
+  public long calculatePart2Result(List<String> input) {
     return calculateResult(input, 3);
   }
 

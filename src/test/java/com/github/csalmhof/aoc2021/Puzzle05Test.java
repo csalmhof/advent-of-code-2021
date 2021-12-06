@@ -8,12 +8,12 @@ public class Puzzle05Test extends AbstractPuzzleTest {
   }
 
   @Override
-  public int getExpectedExampleResultPart1() {
+  public long getExpectedExampleResultPart1() {
     return 5;
   }
 
   @Override
-  public int getExpectedExampleResultPart2() {
+  public long getExpectedExampleResultPart2() {
     return 12;
   }
 }

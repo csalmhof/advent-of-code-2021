@@ -14,7 +14,7 @@ public class Puzzle05 extends AbstractPuzzle {
   }
 
   @Override
-  public int calculatePart1Result(List<String> input) {
+  public long calculatePart1Result(List<String> input) {
     return (int) parseInput(input).stream()
         .filter(v -> !v.isDiagonal())
         .flatMap(vent -> vent.points().stream())
@@ -27,7 +27,7 @@ public class Puzzle05 extends AbstractPuzzle {
   }
 
   @Override
-  public int calculatePart2Result(List<String> input) {
+  public long calculatePart2Result(List<String> input) {
     return (int) parseInput(input).stream()
         .flatMap(vent -> vent.points().stream())
         .collect(Collectors.groupingBy(Function.identity()))

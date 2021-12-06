@@ -17,7 +17,7 @@ public class Puzzle04 extends AbstractPuzzle {
   }
 
   @Override
-  public int calculatePart1Result(List<String> input) {
+  public long calculatePart1Result(List<String> input) {
     BingoGame bingoGame = new BingoGame();
     bingoGame.initNumbers(input.get(LINE_INDEX));
     bingoGame.addBoards(getBoardsFromInput(input));
@@ -27,7 +27,7 @@ public class Puzzle04 extends AbstractPuzzle {
   }
 
   @Override
-  public int calculatePart2Result(List<String> input) {
+  public long calculatePart2Result(List<String> input) {
     BingoGame bingoGame = new BingoGame();
     bingoGame.initNumbers(input.get(LINE_INDEX));
     bingoGame.addBoards(getBoardsFromInput(input));
