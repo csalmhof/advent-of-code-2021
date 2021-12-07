@@ -18,7 +18,7 @@ I implemented a [abstract test class](src/test/java/com/github/csalmhof/aoc2021/
 | 4 | [Giant Squid](https://adventofcode.com/2021/day/4) | [Solution](src/main/java/com/github/csalmhof/aoc2021/Puzzle04.java)|
 | 5 | [Hydrothermal Venture](https://adventofcode.com/2021/day/5) | [Solution](src/main/java/com/github/csalmhof/aoc2021/Puzzle05.java)|
 | 6 | [Lanternfish](https://adventofcode.com/2021/day/6) | [Solution](src/main/java/com/github/csalmhof/aoc2021/Puzzle06.java)|
-| 7 |  |  |
+| 7 | [The Treachery of Whales](https://adventofcode.com/2021/day/7) | [Solution](src/main/java/com/github/csalmhof/aoc2021/Puzzle07.java)|
 | 8 |  |  |
 | 9 |  |  |
 | 10 |  |  |
