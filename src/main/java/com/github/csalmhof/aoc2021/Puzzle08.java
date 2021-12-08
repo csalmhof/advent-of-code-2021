@@ -1,11 +1,7 @@
 package com.github.csalmhof.aoc2021;
 
-import org.apache.commons.collections4.BidiMap;
-import org.apache.commons.collections4.bidimap.DualHashBidiMap;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Puzzle08 extends AbstractPuzzle {
 
@@ -44,78 +40,108 @@ public class Puzzle08 extends AbstractPuzzle {
   private Integer decodeInput(String s) {
     String[] split = s.split(" \\| ");
 
-    BidiMap<Integer, String> decodingMap = findKeys(Arrays.asList(split[0].split(" ")));
+    Collection<SevenSegmentKey> keyMap = findKeys(Arrays.asList(split[0].split(" ")));
 
     String[] vals = split[1].split(" ");
 
-    Integer num1 = decode(vals[0], decodingMap);
-    Integer num2 = decode(vals[1], decodingMap);
-    Integer num3 = decode(vals[2], decodingMap);
-    Integer num4 = decode(vals[3], decodingMap);
+    Integer num1 = decode(vals[0], keyMap);
+    Integer num2 = decode(vals[1], keyMap);
+    Integer num3 = decode(vals[2], keyMap);
+    Integer num4 = decode(vals[3], keyMap);
 
     return num1*1000 + num2*100 + num3 *10 + num4;
   }
 
-  private Integer decode(String val, BidiMap<Integer, String> decodingMap) {
-    return decodingMap.values().stream()
-        .filter(v -> v.length() == val.length())
-        .filter(v -> v.chars().allMatch(i -> val.contains("" + ((char) i))))
-        .map(decodingMap::getKey)
+  private Integer decode(String val, Collection<SevenSegmentKey> decodingMap) {
+    return decodingMap.stream()
+        .filter(key -> key.isSame(val))
+        .map(SevenSegmentKey::getValue)
         .findFirst().get();
   }
 
-  private BidiMap<Integer, String> findKeys(List<String> code) {
-    BidiMap<Integer, String> result = new DualHashBidiMap<>();
+  private Collection<SevenSegmentKey> findKeys(List<String> code) {
+    Map<Integer, SevenSegmentKey> resultMap = new HashMap<>();
 
-    result.put(1, code.stream()
+    resultMap.put(1, new SevenSegmentKey(1, code.stream()
         .filter(s -> s.length() == 2)
-        .findFirst().get());
+        .findFirst().get()));
 
-    result.put(4, code.stream()
+    resultMap.put(4, new SevenSegmentKey(4, code.stream()
         .filter(s -> s.length() == 4)
-        .findFirst().get());
+        .findFirst().get()));
 
-    result.put(7, code.stream()
+    resultMap.put(7, new SevenSegmentKey(7, code.stream()
         .filter(s -> s.length() == 3)
-        .findFirst().get());
+        .findFirst().get()));
 
-    result.put(8, code.stream()
+    resultMap.put(8, new SevenSegmentKey(8, code.stream()
         .filter(s -> s.length() == 7)
-        .findFirst().get());
+        .findFirst().get()));
 
-    result.put(3, code.stream()
+    resultMap.put(3, new SevenSegmentKey(3, code.stream()
         .filter(s -> s.length() == 5)
-        .filter(s -> result.get(1).chars().allMatch(p -> s.contains(((char) p) + "")))
-        .findFirst().get());
+        .filter(s -> resultMap.get(1).isContainedIn(s))
+        .findFirst().get()));
 
-    result.put(6, code.stream()
+    resultMap.put(6, new SevenSegmentKey(6, code.stream()
         .filter(s -> s.length() == 6)
-        .filter(s -> result.get(1).chars().anyMatch(p -> !s.contains(((char) p) + "")))
-        .findFirst().get());
+        .filter(s -> !resultMap.get(1).isContainedIn(s))
+        .findFirst().get()));
 
-    result.put(5, code.stream()
+    resultMap.put(5, new SevenSegmentKey(5, code.stream()
         .filter(s -> s.length() == 5)
-        .filter(s -> s.chars().allMatch(p -> result.get(6).contains(((char) p) + "")))
-        .findFirst().get());
+        .filter(s -> resultMap.get(6).contains(s))
+        .findFirst().get()));
 
-    result.put(0, code.stream()
+    resultMap.put(0, new SevenSegmentKey(0, code.stream()
         .filter(s -> s.length() == 6)
-        .filter(s -> result.get(1).chars().allMatch(p -> s.contains(((char) p) + "")))
-        .filter(s -> !result.get(5).chars().allMatch(p -> s.contains(((char) p) + "")))
-        .findFirst().get());
+        .filter(s -> resultMap.get(1).isContainedIn(s))
+        .filter(s -> !resultMap.get(5).isContainedIn(s))
+        .findFirst().get()));
 
-    result.put(9, code.stream()
+    resultMap.put(9, new SevenSegmentKey(9, code.stream()
         .filter(s -> s.length() == 6)
-        .filter(s -> !result.get(6).chars().allMatch(p -> s.contains(((char) p) + "")))
-        .filter(s -> !result.get(0).chars().allMatch(p -> s.contains(((char) p) + "")))
-        .findFirst().get());
+        .filter(s -> !resultMap.get(6).isSame(s))
+        .filter(s -> !resultMap.get(0).isSame(s))
+        .findFirst().get()));
 
-    result.put(2, code.stream()
+    resultMap.put(2, new SevenSegmentKey(2, code.stream()
         .filter(s -> s.length() == 5)
-        .filter(s -> !result.get(3).chars().allMatch(p -> s.contains(((char) p) + "")))
-        .filter(s -> !result.get(5).chars().allMatch(p -> s.contains(((char) p) + "")))
-        .findFirst().get());
+        .filter(s -> !resultMap.get(3).isSame(s))
+        .filter(s -> !resultMap.get(5).isSame(s))
+        .findFirst().get()));
 
-    return result;
+    return resultMap.values();
+  }
+
+  public static class SevenSegmentKey {
+    private final int value;
+    private final List<Character> chars;
+
+    public int getValue() {
+      return value;
+    }
+
+    public SevenSegmentKey(int value, String s) {
+      this.value = value;
+      this.chars = stringToCharList(s);
+    }
+
+    public boolean contains(String other) {
+      return this.chars.containsAll(stringToCharList(other));
+    }
+
+    public boolean isContainedIn(String other) {
+      return stringToCharList(other).containsAll(this.chars);
+    }
+
+    public boolean isSame(String other) {
+      return this.chars.size() == other.length()
+          && this.isContainedIn(other);
+    }
+
+    private List<Character> stringToCharList(String s) {
+      return s.chars().mapToObj(i -> (char) i).collect(Collectors.toList());
+    }
   }
 }
