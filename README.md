@@ -20,7 +20,7 @@ I implemented a [abstract test class](src/test/java/com/github/csalmhof/aoc2021/
 | 6 | [Lanternfish](https://adventofcode.com/2021/day/6) | [Solution](src/main/java/com/github/csalmhof/aoc2021/Puzzle06.java)|
 | 7 | [The Treachery of Whales](https://adventofcode.com/2021/day/7) | [Solution](src/main/java/com/github/csalmhof/aoc2021/Puzzle07.java)|
 | 8 | [Seven Segment Search](https://adventofcode.com/2021/day/8) | [Solution](src/main/java/com/github/csalmhof/aoc2021/Puzzle08.java)|
-| 9 |  |  |
+| 9 | [Smoke Basin](https://adventofcode.com/2021/day/9) | [Solution](src/main/java/com/github/csalmhof/aoc2021/Puzzle09.java)|
 | 10 |  |  |
 | 11 |  |  |
 | 12 |  |  |
