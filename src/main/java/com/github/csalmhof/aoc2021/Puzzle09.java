@@ -1,9 +1,11 @@
 package com.github.csalmhof.aoc2021;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import com.github.csalmhof.aoc2021.helpers.day9.Coordinate;
+import com.github.csalmhof.aoc2021.helpers.day9.HeightMap;
+
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 
 public class Puzzle09 extends AbstractPuzzle {
 
@@ -14,96 +16,23 @@ public class Puzzle09 extends AbstractPuzzle {
 
   @Override
   public long calculatePart1Result(List<String> input) {
-    char[][] map = new char[input.size()][input.get(0).length()];
+    HeightMap heightMap = HeightMap.of(input);
 
-    for (int i = 0; i < input.size(); i++) {
-      for (int j = 0; j < input.get(i).length(); j++) {
-        map[i][j] = input.get(i).charAt(j);
-      }
-    }
+    Map<Coordinate, Integer> lowPoints = heightMap.findLowPoints();
 
-    List<Long> adj = new ArrayList<>();
-    for (int i = 0; i < map.length; i++) {
-      for (int j = 0; j < map[0].length; j++) {
-        if (isAdjacent(map, i, j)) {
-          adj.add(Long.parseLong(map[i][j] + "") + 1);
-        }
-      }
-    }
-
-    return adj.stream().reduce(0L, Long::sum);
-
-  }
-
-  private boolean isAdjacent(char[][] map, int i, int j) {
-    char toCheck = map[i][j];
-    for (int i2 = -1; i2 < 2; i2++) {
-      if ((i + i2 >= 0) && (i + i2 < map.length)) {
-        for (int j2 = -1; j2 < 2; j2++) {
-          if ((j + j2 >= 0) && (j + j2 < map[0].length)) {
-            if (Math.abs(j2) != Math.abs(i2)) {
-              if (map[i + i2][j + j2] <= toCheck) {
-                return false;
-              }
-            }
-          }
-        }
-      }
-    }
-
-    return true;
+    return lowPoints.values().stream().reduce(0, (i1, i2) -> i1 + i2 + 1);
   }
 
   @Override
   public long calculatePart2Result(List<String> input) {
-    char[][] map = new char[input.size()][input.get(0).length()];
-    boolean[][] marked = new boolean[input.size()][input.get(0).length()];
+    HeightMap heightMap = HeightMap.of(input);
 
-    for (int i = 0; i < input.size(); i++) {
-      for (int j = 0; j < input.get(i).length(); j++) {
-        map[i][j] = input.get(i).charAt(j);
-      }
-    }
+    List<List<Coordinate>> basins = heightMap.findBasins();
 
-    List<Long> bas = new ArrayList<>();
-    for (int i = 0; i < map.length; i++) {
-      for (int j = 0; j < map[0].length; j++) {
-        if (!marked[i][j] && map[i][j] != '9') {
-          List<Character> basin = basin(map, marked, i, j);
-          bas.add((long) basin.size());
-        }
-      }
-    }
-
-    bas.sort(Comparator.comparing(i -> -i));
-    return bas.get(0) * bas.get(1) * bas.get(2);
-  }
-
-  private List<Character> basin(char[][] map, boolean[][] marked, int i, int j) {
-    char toCheck = map[i][j];
-    if (marked[i][j] || map[i][j] == '9') {
-      return Collections.emptyList();
-    }
-    marked[i][j] = true;
-    List<Character> basin = new ArrayList<>();
-    basin.add(toCheck);
-    for (int i2 = -1; i2 < 2; i2++) {
-      if ((i + i2 >= 0) && (i + i2 < map.length)) {
-        for (int j2 = -1; j2 < 2; j2++) {
-          if ((j + j2 >= 0) && (j + j2 < map[0].length)) {
-            if (Math.abs(j2) != Math.abs(i2)) {
-              if (!marked[i + i2][j + j2]) {
-                if ((map[i + i2][j + j2] <= toCheck  || map[i + i2][j + j2] > toCheck)) {
-
-                  basin.addAll(basin(map, marked, i + i2, j + j2));
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-    return basin;
-
+    return basins.stream()
+        .map(List::size)
+        .sorted(Comparator.comparing(i -> -i))
+        .limit(3)
+        .reduce(1, (i1, i2) -> i1*i2);
   }
 }
