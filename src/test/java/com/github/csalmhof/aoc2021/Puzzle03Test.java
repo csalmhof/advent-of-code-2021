@@ -3,7 +3,7 @@ package com.github.csalmhof.aoc2021;
 public class Puzzle03Test extends AbstractPuzzleTest {
 
   @Override
-  public AbstractPuzzle getPuzzleInstance() {
+  public AbstractPuzzle createPuzzle() {
     return new Puzzle03();
   }
 

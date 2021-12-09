@@ -8,14 +8,18 @@ public abstract class AbstractPuzzleTest {
   private AbstractPuzzle puzzle;
 
   public AbstractPuzzleTest() {
-    this.puzzle = getPuzzleInstance();
+    this.puzzle = createPuzzle();
   }
 
   public abstract long getExpectedExampleResultPart1();
 
   public abstract long getExpectedExampleResultPart2();
 
-  public abstract AbstractPuzzle getPuzzleInstance();
+  public abstract AbstractPuzzle createPuzzle();
+
+  public AbstractPuzzle getPuzzle() {
+    return puzzle;
+  }
 
   @Test
   public void part1Test() {
