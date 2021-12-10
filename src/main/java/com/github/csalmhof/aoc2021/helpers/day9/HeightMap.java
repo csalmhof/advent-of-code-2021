@@ -45,7 +45,7 @@ public class HeightMap {
     Map<Coordinate, Boolean> markedCoordinates = map.keySet().stream()
         .collect(Collectors.toMap(Function.identity(), (e) -> Boolean.FALSE));
 
-    return map.keySet().stream()
+    return findLowPoints().keySet().stream()
         .map(point -> evaluateBasinRecursive(point, markedCoordinates))
         .filter(basin -> !basin.isEmpty())
         .collect(Collectors.toList());
