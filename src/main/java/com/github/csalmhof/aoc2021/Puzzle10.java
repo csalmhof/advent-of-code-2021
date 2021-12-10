@@ -19,6 +19,7 @@ public class Puzzle10 extends AbstractPuzzle {
   public long calculatePart1Result(List<String> input) {
     return input.stream().map(this::isCorrupted).reduce(0, Integer::sum);
   }
+
   @Override
   public long calculatePart2Result(List<String> input) {
     List<List<Character>> closingList = input.stream()
@@ -31,34 +32,34 @@ public class Puzzle10 extends AbstractPuzzle {
         .sorted(Comparator.comparing(Function.identity()))
         .collect(Collectors.toList());
 
-    int pos = (scores.size() +1)/2;
+    int pos = scores.size() / 2;
 
-    return scores.get(pos-1);
+    return scores.get(pos);
   }
 
   private long scoreClosingList(List<Character> list) {
     long score = 0;
-    for(Character c : list) {
-      score = score * 5 + pointsPart2(c);
+    for (Character c : list) {
+      score = score * 5 + toScorePart2(c);
     }
     return score;
   }
 
   private List<Character> closingLine(String s) {
     List<Character> open = new LinkedList<>();
-    for(int i = 0; i <s.length(); i++) {
-      if(open.isEmpty()) {
+    for (int i = 0; i < s.length(); i++) {
+      if (open.isEmpty()) {
         open.add(s.charAt(i));
         continue;
       }
 
-      if(isOpening(s.charAt(i))) {
+      if (isOpening(s.charAt(i))) {
         open.add(s.charAt(i));
         continue;
       }
 
-      if(closingOf(open.get(open.size()-1)) == s.charAt(i)) {
-        open.remove(open.size()-1);
+      if (closingOf(open.get(open.size() - 1)) == s.charAt(i)) {
+        open.remove(open.size() - 1);
         continue;
       }
 
@@ -66,31 +67,30 @@ public class Puzzle10 extends AbstractPuzzle {
     }
 
     return IntStream.range(0, open.size())
-        .mapToObj(i -> open.get(open.size()-i-1))
+        .mapToObj(i -> open.get(open.size() - i - 1))
         .map(this::closingOf)
         .collect(Collectors.toList());
   }
 
   private int isCorrupted(String s) {
     List<Character> open = new LinkedList<>();
-    int pos = 0;
-    for(int i = 0; i <s.length(); i++) {
-      if(open.isEmpty()) {
+    for (int i = 0; i < s.length(); i++) {
+      if (open.isEmpty()) {
         open.add(s.charAt(i));
         continue;
       }
 
-      if(isOpening(s.charAt(i))) {
+      if (isOpening(s.charAt(i))) {
         open.add(s.charAt(i));
         continue;
       }
 
-      if(closingOf(open.get(open.size()-1)) == s.charAt(i)) {
-        open.remove(open.size()-1);
+      if (closingOf(open.get(open.size() - 1)) == s.charAt(i)) {
+        open.remove(open.size() - 1);
         continue;
       }
 
-      return pointsPart1(s.charAt(i));
+      return toScorePart1(s.charAt(i));
     }
 
     return 0;
@@ -98,68 +98,38 @@ public class Puzzle10 extends AbstractPuzzle {
 
   private boolean isOpening(char c) {
     return c == '('
-        || c ==  '['
-        || c ==  '{'
-        || c ==  '<';
+        || c == '['
+        || c == '{'
+        || c == '<';
   }
 
   private char closingOf(char c) {
-    if(c == '(') {
-      return ')';
+    switch (c) {
+      case '(': return ')';
+      case '[': return ']';
+      case '{': return '}';
+      case '<': return '>';
+      default: throw new IllegalArgumentException(c + " is not a closingChar");
     }
-
-    if(c == '[') {
-      return ']';
-    }
-
-    if(c == '{') {
-      return '}';
-    }
-
-    if(c == '<') {
-      return '>';
-    }
-
-    throw  new IllegalArgumentException();
   }
 
-  private int pointsPart1(char c) {
-    if(c ==  ')') {
-      return 3;
+  private int toScorePart1(char c) {
+    switch (c) {
+      case ')': return 3;
+      case ']': return 57;
+      case '}': return 1197;
+      case '>': return 25137;
+      default: return 0;
     }
-
-    if(c ==  ']') {
-      return 57;
-    }
-
-    if(c == '}') {
-      return 1197;
-    }
-
-    if(c == '>') {
-      return 25137;
-    }
-
-    return 0;
   }
 
-  private int pointsPart2(char c) {
-    if(c ==  ')') {
-      return 1;
+  private int toScorePart2(char c) {
+    switch (c) {
+      case ')': return 1;
+      case ']': return 2;
+      case '}': return 3;
+      case '>': return 4;
+      default: return 0;
     }
-
-    if(c ==  ']') {
-      return 2;
-    }
-
-    if(c == '}') {
-      return 3;
-    }
-
-    if(c == '>') {
-      return 4;
-    }
-
-    return 0;
   }
 }
