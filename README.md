@@ -22,7 +22,7 @@ I implemented a [abstract test class](src/test/java/com/github/csalmhof/aoc2021/
 | 8 | [Seven Segment Search](https://adventofcode.com/2021/day/8) | [Solution](src/main/java/com/github/csalmhof/aoc2021/Puzzle08.java)|
 | 9 | [Smoke Basin](https://adventofcode.com/2021/day/9) | [Solution](src/main/java/com/github/csalmhof/aoc2021/Puzzle09.java)|
 | 10 | [Syntax Scoring](https://adventofcode.com/2021/day/10) | [Solution](src/main/java/com/github/csalmhof/aoc2021/Puzzle10.java)|
-| 11 |  |  |
+| 11 | [Dumbo Octopus](https://adventofcode.com/2021/day/11) | [Solution](src/main/java/com/github/csalmhof/aoc2021/Puzzle11.java)|
 | 12 |  |  |
 | 13 |  |  |
 | 14 |  |  |
