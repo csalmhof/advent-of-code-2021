@@ -43,12 +43,7 @@ public class Puzzle12Recursive extends AbstractPuzzle {
 
     return caveMap.get(position).stream()
         .filter(next -> !"start".equals(next))
-        .filter(next -> {
-          if(allowTwiceVisiting && !nowTwiceVisited) {
-            return true;
-          }
-          return !nowVisitedSmalls.contains(next);
-        })
+        .filter(next -> (allowTwiceVisiting && !nowTwiceVisited) || !nowVisitedSmalls.contains(next))
         .map(next -> findPathsRecursive(caveMap, next, nowVisitedSmalls, allowTwiceVisiting, nowTwiceVisited))
         .reduce(0L, Long::sum);
   }
