@@ -26,7 +26,7 @@ public class Puzzle12 extends AbstractPuzzle {
   }
 
   private Map<String, Set<String>> inputToMap(List<String> input) {
-    Map<String, Set<String>> cave = input.stream()
+    return input.stream()
         .map(l -> l.split("-"))
         .flatMap(l -> {
           String[] dir1 = {l[0], l[1]};
@@ -41,7 +41,6 @@ public class Puzzle12 extends AbstractPuzzle {
             e.getValue().stream()
                 .map(l -> l[1])
                 .collect(Collectors.toSet())));
-    return cave;
   }
 
   private int getNumOfPaths(Map<String, Set<String>> caveMap, boolean oneSmallTwiceAllowed) {
