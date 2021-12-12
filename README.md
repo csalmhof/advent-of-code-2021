@@ -23,7 +23,7 @@ I implemented a [abstract test class](src/test/java/com/github/csalmhof/aoc2021/
 | 9 | [Smoke Basin](https://adventofcode.com/2021/day/9) | [Solution](src/main/java/com/github/csalmhof/aoc2021/Puzzle09.java)|
 | 10 | [Syntax Scoring](https://adventofcode.com/2021/day/10) | [Solution](src/main/java/com/github/csalmhof/aoc2021/Puzzle10.java)|
 | 11 | [Dumbo Octopus](https://adventofcode.com/2021/day/11) | [Solution](src/main/java/com/github/csalmhof/aoc2021/Puzzle11.java)|
-| 12 |  |  |
+| 12 | [Passage Pathing](https://adventofcode.com/2021/day/12) | [Solution](src/main/java/com/github/csalmhof/aoc2021/Puzzle12.java)|
 | 13 |  |  |
 | 14 |  |  |
 | 15 |  |  |

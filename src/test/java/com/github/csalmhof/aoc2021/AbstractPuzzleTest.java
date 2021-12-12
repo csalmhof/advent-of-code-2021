@@ -44,4 +44,8 @@ public abstract class AbstractPuzzleTest {
   public String buildInputPath(int day, boolean example) {
     return "day" + day + "/" + (example ? "example" : "input") + ".txt";
   }
+
+  public String buildInputPath(int day, boolean example, int num) {
+    return "day" + day + "/" + (example ? "example" : "input") + num + ".txt";
+  }
 }
