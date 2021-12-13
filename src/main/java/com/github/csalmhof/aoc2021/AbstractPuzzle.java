@@ -28,7 +28,7 @@ public abstract class AbstractPuzzle {
     System.out.println(getPart2Result(filePath));
   }
 
-  private List<String> getInput(String filePath) {
+  public List<String> getInput(String filePath) {
     return FileUtils.getFileInputAsList(filePath);
   }
 }
