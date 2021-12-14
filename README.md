@@ -25,7 +25,7 @@ I implemented a [abstract test class](src/test/java/com/github/csalmhof/aoc2021/
 | 11 | [Dumbo Octopus](https://adventofcode.com/2021/day/11) | [Solution](src/main/java/com/github/csalmhof/aoc2021/Puzzle11.java)|
 | 12 | [Passage Pathing](https://adventofcode.com/2021/day/12) | [Solution](src/main/java/com/github/csalmhof/aoc2021/Puzzle12.java)|
 | 13 | [Transparent Origami](https://adventofcode.com/2021/day/13) | [Solution](src/main/java/com/github/csalmhof/aoc2021/Puzzle13.java)|
-| 14 |  |  |
+| 14 | [Extended Polymerization](https://adventofcode.com/2021/day/14) | [Solution](src/main/java/com/github/csalmhof/aoc2021/Puzzle14.java)|
 | 15 |  |  |
 | 16 |  |  |
 | 17 |  |  |

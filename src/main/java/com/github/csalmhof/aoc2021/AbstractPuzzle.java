@@ -13,11 +13,17 @@ public abstract class AbstractPuzzle {
   public abstract long calculatePart2Result(List<String> input);
 
   public long getPart1Result(String filePath) {
-    return calculatePart1Result(getInput(filePath));
+    long start = System.currentTimeMillis();
+    long result =  calculatePart1Result(getInput(filePath));
+    System.out.println("Time: " + (System.currentTimeMillis()-start) + "ms");
+    return result;
   }
 
   public long getPart2Result(String filePath) {
-    return calculatePart2Result(getInput(filePath));
+    long start = System.currentTimeMillis();
+    long result =  calculatePart2Result(getInput(filePath));
+    System.out.println("Time: " + (System.currentTimeMillis()-start) + "ms");
+    return result;
   }
 
   public void printPart1Result(String filePath) {
