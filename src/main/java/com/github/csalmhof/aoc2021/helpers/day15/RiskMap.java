@@ -34,7 +34,7 @@ public class RiskMap {
         for (int t = 0; t < times; t++) {
           for (int t2 = 0; t2 < times; t2++) {
             int value = Integer.parseInt(input.get(i).charAt(j) + "");
-            map.put(new Coordinate(i + input.size() * t, j + input.size() * t2), (value + t + t2) < 10 ? ((value + t + t2)) : ((value + t + t2) - 9));
+            map.put(new Coordinate(i + input.size() * t, j + input.get(i).length() * t2), (value + t + t2) < 10 ? ((value + t + t2)) : ((value + t + t2)%9));
           }
         }
       }
@@ -44,7 +44,7 @@ public class RiskMap {
 
   public long getLowestPathLen() {
     Queue<RiskPath> queue = new PriorityQueue<>();
-    queue.add(new RiskPath(new Coordinate(0, 0), Collections.emptySet(), map));
+    queue.add(new RiskPath(new Coordinate(0, 0), Collections.emptySet(), 0, map));
 
     Map<Coordinate, Long> costMap = new HashMap<>();
 
@@ -59,25 +59,17 @@ public class RiskMap {
 
       p.position.getAdjacentCoordinates(maxX, maxY).stream()
           .filter(np -> !p.visited.contains(np))
-          .filter(np -> !costMap.containsKey(np) || costMap.get(np) > p.length + map.get(np))
+          .filter(np -> !costMap.containsKey(np) || costMap.get(np) >= p.length + map.get(np))
           .forEach(np -> queue.add(new RiskPath(np, p.visited, p.length, map)));
-
     }
 
     return costMap.get(new Coordinate(maxX, maxY)) - map.get(new Coordinate(0, 0));
   }
 
-  public static class RiskPath implements Comparable<RiskPath> {
+  private static class RiskPath implements Comparable<RiskPath> {
     Coordinate position;
     Set<Coordinate> visited;
     long length;
-
-    public RiskPath(Coordinate position, Set<Coordinate> visited, Map<Coordinate, Integer> map) {
-      this.position = position;
-      this.visited = new HashSet<>(visited);
-      this.visited.add(position);
-      this.length = this.visited.stream().map(c -> (long) map.get(c)).reduce(0L, Long::sum);
-    }
 
     public RiskPath(Coordinate position, Set<Coordinate> visited, long prevLen, Map<Coordinate, Integer> map) {
       this.position = position;
@@ -88,7 +80,7 @@ public class RiskMap {
 
     @Override
     public int compareTo(RiskPath riskPath) {
-      return this.length > riskPath.length ? 1 : 0;
+      return Long.compare(this.length, riskPath.length);
     }
   }
 }
