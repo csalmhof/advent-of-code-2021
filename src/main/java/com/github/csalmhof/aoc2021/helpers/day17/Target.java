@@ -23,7 +23,7 @@ public class Target {
   }
 
   public boolean isHitBy(ProbeShot shot) {
-    for (int i = 0; shot.calcPosition(i).x <= maxX && shot.calcPosition(i).y >= minY; i++) {
+    for (int i = Math.max(0, 1+shot.initialSpeed.y*2); shot.calcPosition(i).x <= maxX && shot.calcPosition(i).y >= minY; i++) {
       if (this.contains(shot.calcPosition(i))) {
         return true;
       }
