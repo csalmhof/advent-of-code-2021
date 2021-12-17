@@ -28,7 +28,7 @@ I implemented a [abstract test class](src/test/java/com/github/csalmhof/aoc2021/
 | 14 | [Extended Polymerization](https://adventofcode.com/2021/day/14) | [Solution](src/main/java/com/github/csalmhof/aoc2021/Puzzle14.java)|
 | 15 | [Chiton](https://adventofcode.com/2021/day/15) | [Solution](src/main/java/com/github/csalmhof/aoc2021/Puzzle15.java)|
 | 16 | [Packet Decoder](https://adventofcode.com/2021/day/16) | [Solution](src/main/java/com/github/csalmhof/aoc2021/Puzzle16.java)|
-| 17 |  |  |
+| 17 | [Trick Shot](https://adventofcode.com/2021/day/17) | [Solution](src/main/java/com/github/csalmhof/aoc2021/Puzzle17.java)|
 | 18 |  |  |
 | 19 |  |  |
 | 20 |  |  |
