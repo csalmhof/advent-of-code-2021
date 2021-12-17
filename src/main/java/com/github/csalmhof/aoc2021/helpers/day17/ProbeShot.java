@@ -10,6 +10,9 @@ public class ProbeShot {
   }
 
   public int getHighestY() {
+    if(initialSpeed.y <= 0)  {
+      return 0;
+    }
     return calcYposition(initialSpeed.y);
   }
 
@@ -34,6 +37,6 @@ public class ProbeShot {
   }
 
   public static int getMinXSpeedToReachValue(int targetX) {
-    return (int) Math.ceil(-1 + Math.sqrt(8*targetX)/2);
+    return (int) Math.ceil((-1 + Math.sqrt(8*targetX))/2);
   }
 }
