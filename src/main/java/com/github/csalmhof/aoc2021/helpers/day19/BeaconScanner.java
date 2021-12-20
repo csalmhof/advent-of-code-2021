@@ -30,32 +30,7 @@ public class BeaconScanner {
     List<BeaconScanner> result = new ArrayList<>();
 
     List<Integer> directions = Arrays.asList(1, -1);
-    /* possible directions
-       x,  y,  z
-       x,  y, -z
-       x, -y,  z
-       x, -y, -z
-      -x,  y,  z
-      -x,  y, -z
-      -x, -y,  z
-      -x, -y, -z
-       y,  z,  x
-       y,  z, -x
-       y, -z,  x
-       y, -z, -x
-      -y,  z,  x
-      -y,  z, -x
-      -y, -z,  x
-      -y, -z, -x
-       z,  x,  y
-       z,  x, -y
-       z, -x,  y
-       z, -x, -y
-      -z,  x,  y
-      -z,  x, -y
-      -z, -x,  y
-      -z, -x, -y
-     */
+
     for (int up = 0; up < 6; up++) {
       for (int dirX : directions) {
         for (int dirY : directions) {
@@ -75,7 +50,6 @@ public class BeaconScanner {
 
   public boolean alignIfPossible(BeaconScanner alignedScanner) {
     for (BeaconScanner orientatedScanner : this.getAllPossibleOrientations()) {
-      int asdf = 0;
       for (Point3D startPoint : alignedScanner.getPoints()) {
         for (Point3D targetPoint : orientatedScanner.getPoints()) {
           int matches = 0;
