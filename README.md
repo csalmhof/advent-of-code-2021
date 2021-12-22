@@ -33,7 +33,7 @@ I implemented a [abstract test class](src/test/java/com/github/csalmhof/aoc2021/
 | 19 | [Beacon Scanner](https://adventofcode.com/2021/day/19) | [Solution](src/main/java/com/github/csalmhof/aoc2021/Puzzle19.java)|
 | 20 | [Trench Map](https://adventofcode.com/2021/day/20) | [Solution](src/main/java/com/github/csalmhof/aoc2021/Puzzle20.java)|
 | 21 | [Dirac Dice](https://adventofcode.com/2021/day/21) | [Solution](src/main/java/com/github/csalmhof/aoc2021/Puzzle21.java)|
-| 22 |  |  |
+| 22 | [Reactor Reboot](https://adventofcode.com/2021/day/22) | [Solution](src/main/java/com/github/csalmhof/aoc2021/Puzzle22.java)|
 | 23 |  |  |
 | 24 |  |  |
 | 25 |  |  |
