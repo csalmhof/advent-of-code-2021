@@ -1,13 +1,11 @@
 package com.github.csalmhof.aoc2021;
 
-import com.github.csalmhof.aoc2021.helpers.day22.Point3D;
 import com.github.csalmhof.aoc2021.util.Pair;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.LongStream;
 
 public class Puzzle22 extends AbstractPuzzle {
 
@@ -18,19 +16,12 @@ public class Puzzle22 extends AbstractPuzzle {
 
   @Override
   public long calculatePart1Result(List<String> input) {
-    Set<Point3D> on = new HashSet<>();
+    List<CuboidCommand> commands = input.stream()
+        .map(CuboidCommand::of)
+        .filter(c -> c.getCuboid().isInRange(-50, 50, -50, 50, -50, 50))
+        .collect(Collectors.toList());
 
-    for (int i = 0; i < 20; i++) {
-      Command c = Command.of(input.get(i));
-
-      if (Instruction.ON.equals(c.getInstruction())) {
-        on.addAll(c.getPoints());
-      } else {
-        on.removeAll(c.getPoints());
-      }
-    }
-
-    return on.size();
+    return calc(commands);
   }
 
 
@@ -40,6 +31,10 @@ public class Puzzle22 extends AbstractPuzzle {
         .map(CuboidCommand::of)
         .collect(Collectors.toList());
 
+    return calc(commands);
+  }
+
+  private long calc(List<CuboidCommand> commands) {
     Set<Cuboid> onCuboids = new HashSet<>();
     Set<Cuboid> positiveIntersections = new HashSet<>();
     Set<Cuboid> negativeIntersections = new HashSet<>();
@@ -51,7 +46,6 @@ public class Puzzle22 extends AbstractPuzzle {
       for (Cuboid cuboid : onCuboids) {
         addIntersectionToSet(newNegativeIntersections, command.getCuboid(), cuboid);
       }
-
 
       for (Cuboid cuboid : positiveIntersections) {
         addIntersectionToSet(newNegativeIntersections, command.getCuboid(), cuboid);
@@ -93,6 +87,15 @@ public class Puzzle22 extends AbstractPuzzle {
 
     public static Cuboid empty() {
       return new Cuboid(null, null, null);
+    }
+
+    public boolean isInRange(long minX, long maxX, long minY, long maxY, long minZ, long maxZ) {
+      return x.left >= minX
+          && x.right <= maxX
+          && y.left >= minY
+          && y.right <= maxY
+          && z.left >= minZ
+          && z.right <= maxZ;
     }
 
     public Cuboid(Pair<Long, Long> x, Pair<Long, Long> y, Pair<Long, Long> z) {
@@ -152,48 +155,6 @@ public class Puzzle22 extends AbstractPuzzle {
 
     public Cuboid getCuboid() {
       return cuboid;
-    }
-  }
-
-  //naive for Part1
-  public static class Command {
-
-    private final Instruction instruction;
-    private final Set<Point3D> points;
-
-    private Command(Instruction instruction, Set<Point3D> points) {
-      this.instruction = instruction;
-      this.points = points;
-    }
-
-    public Instruction getInstruction() {
-      return instruction;
-    }
-
-    public Set<Point3D> getPoints() {
-      return points;
-    }
-
-    public static Command of(String s) {
-      Instruction i = s.startsWith("on") ? Instruction.ON : Instruction.OFF;
-
-      long xMin = Long.parseLong(s.split("x=")[1].split("\\.\\.")[0]);
-      long xMax = Long.parseLong(s.split("x=")[1].split("\\.\\.")[1].split(",y")[0]);
-      long yMin = Long.parseLong(s.split("y=")[1].split("\\.\\.")[0]);
-      long yMax = Long.parseLong(s.split("y=")[1].split("\\.\\.")[1].split(",z")[0]);
-      long zMin = Long.parseLong(s.split("z=")[1].split("\\.\\.")[0]);
-      long zMax = Long.parseLong(s.split("z=")[1].split("\\.\\.")[1]);
-
-      Set<Point3D> points = LongStream.range(xMin, xMax + 1)
-          .boxed()
-          .flatMap(x -> LongStream.range(yMin, yMax + 1)
-              .boxed()
-              .flatMap(y -> LongStream.range(zMin, zMax + 1)
-                  .boxed()
-                  .map(z -> Point3D.of(x, y, z))))
-          .collect(Collectors.toSet());
-
-      return new Command(i, points);
     }
   }
 }
